@@ -1,17 +1,18 @@
-import { Component, Input } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { Subscription } from 'rxjs';
 
 import { Post } from '../post.model';
+import { PostsService } from '../posts.service';
 
 @Component({
   selector: 'app-post-list',
   standalone: true,
-  imports: [
-    MatExpansionModule
-  ],
+  imports: [MatExpansionModule],
   templateUrl: './post-list.component.html',
+  styleUrls: ['./post-list.component.css'],
 })
-export class PostListComponent {
+export class PostListComponent implements OnInit, OnDestroy {
   // posts = [
   //   {
   //     id: 1,
@@ -24,5 +25,19 @@ export class PostListComponent {
   //     content: 'This is the second post content.'
   //   }
   // ]
-  @Input() posts: Post[] = [];
+  posts: Post[] = [];
+  private postsSub!: Subscription;
+
+  constructor(public postsService: PostsService) {}
+
+  ngOnInit() {
+    this.posts = this.postsService.getPosts();
+    this.postsSub = this.postsService.getPostUpdateListener().subscribe((posts: Post[]) => {
+      this.posts = posts;
+    });
+  }
+
+  ngOnDestroy() {
+    this.postsSub.unsubscribe();
+  }
 }
