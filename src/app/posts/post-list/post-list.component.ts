@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { Subscription } from 'rxjs';
 
@@ -11,6 +11,7 @@ import { MatButton } from '@angular/material/button';
   standalone: true,
   imports: [MatExpansionModule, MatButton],
   templateUrl: './post-list.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./post-list.component.css'],
 })
 export class PostListComponent implements OnInit, OnDestroy {

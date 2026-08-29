@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -12,6 +12,7 @@ import { PostsService } from '../posts.service';
   standalone: true,
   imports: [FormsModule, MatButtonModule, MatCardModule, MatInputModule],
   templateUrl: './post-create.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './post-create.component.css',
 })
 export class PostCreateComponent {
@@ -25,6 +26,6 @@ export class PostCreateComponent {
       return;
     }
     this.postsService.addPost(form.value.title, form.value.content);
-    form.resetForm()
+    form.resetForm();
   }
 }

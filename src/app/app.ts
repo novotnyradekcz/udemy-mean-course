@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 import { PostCreateComponent } from './posts/post-create/post-create.component';
@@ -8,15 +8,9 @@ import { PostListComponent } from './posts/post-list/post-list.component';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [
-    HeaderComponent,
-    PostCreateComponent,
-    PostListComponent,
-    RouterOutlet
-  ],
+  imports: [HeaderComponent, PostCreateComponent, PostListComponent, RouterOutlet],
   templateUrl: './app.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './app.css',
 })
-export class App {
-
-}
+export class App {}
