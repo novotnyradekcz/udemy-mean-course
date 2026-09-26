@@ -5,11 +5,12 @@ import { Subscription } from 'rxjs';
 import { Post } from '../post.model';
 import { PostsService } from '../posts.service';
 import { MatButton } from '@angular/material/button';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-post-list',
   standalone: true,
-  imports: [MatExpansionModule, MatButton],
+  imports: [MatExpansionModule, MatButton, RouterLink],
   templateUrl: './post-list.component.html',
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./post-list.component.css'],
