@@ -1,4 +1,6 @@
-@if (posts.length > 0) {
+@if (isLoading) {
+  <mat-spinner></mat-spinner>
+} @else if (posts.length > 0) {
   <mat-accordion multi="true">
     @for (post of posts; track post) {
       <mat-expansion-panel>

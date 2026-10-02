@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { Subscription } from 'rxjs';
 
 import { Post } from '../post.model';
@@ -10,7 +11,7 @@ import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-post-list',
   standalone: true,
-  imports: [MatExpansionModule, MatButton, RouterLink],
+  imports: [MatExpansionModule, MatButton, RouterLink, MatProgressSpinnerModule],
   templateUrl: './post-list.component.html',
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./post-list.component.css'],
@@ -29,13 +30,16 @@ export class PostListComponent implements OnInit, OnDestroy {
   //   }
   // ]
   posts: Post[] = [];
+  isLoading = false;
   private postsSub!: Subscription;
 
   constructor(public postsService: PostsService) {}
 
   ngOnInit() {
+    this.isLoading = true;
     this.postsService.getPosts();
     this.postsSub = this.postsService.getPostUpdateListener().subscribe((posts: Post[]) => {
+      this.isLoading = false;
       this.posts = posts;
     });
   }

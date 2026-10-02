@@ -8,7 +8,7 @@ import { PostListComponent } from './posts/post-list/post-list.component';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [HeaderComponent, PostCreateComponent, PostListComponent, RouterOutlet],
+  imports: [HeaderComponent, RouterOutlet],
   templateUrl: './app.html',
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './app.css',
